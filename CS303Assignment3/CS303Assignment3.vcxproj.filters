@@ -15,18 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\Queue.hpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Queue.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\PostfixConvert.h">
+    <ClInclude Include="PostfixConvert.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\main (5).cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\PostfixConvert.cpp">
+    <ClCompile Include="PostfixConvert.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

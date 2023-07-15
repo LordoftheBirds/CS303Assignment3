@@ -127,12 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\PostfixConvert.h" />
-    <ClInclude Include="..\..\..\..\Downloads\Queue.hpp" />
+    <ClInclude Include="PostfixConvert.h" />
+    <ClInclude Include="Queue.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\main (5).cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\PostfixConvert.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PostfixConvert.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

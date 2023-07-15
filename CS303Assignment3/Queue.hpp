@@ -18,10 +18,32 @@ private:
 
 public:
 	Queue();
+	
+	/*
+	* Adds an item to the back of the queue.
+	*/
 	void push(Item_Type item);
+
+	/*
+	* Remove the item at the front of the queue and return it.
+	* Cannot be called on empty queue.
+	*/
 	Item_Type pop();
+
+	/*
+	* Return the item at the front of the queue.
+	* Cannot be called on empty queue.
+	*/
 	Item_Type peek();
+
+	/*
+	* Returns true if queue as no items. False otherwise.
+	*/
 	bool isEmpty();
+
+	/*
+	* Returns the number of items currently in queue.
+	*/
 	size_t queueSize();
 };
 
@@ -35,7 +57,7 @@ Queue<Item_Type>::Queue() {
 template<typename Item_Type>
 void Queue<Item_Type>::push(Item_Type item) {
 	Node* newNode = new Node(item);
-	
+
 	if (isEmpty()) {
 		frontQueue = newNode;
 		backQueue = newNode;
@@ -58,7 +80,7 @@ bool Queue<Item_Type>::isEmpty() {
 
 template<typename Item_Type>
 Item_Type Queue<Item_Type>::pop() {
-	//Add exception for empty queue
+
 	Item_Type returnItem = frontQueue->data;
 	Node* toDelete = frontQueue;
 	frontQueue = frontQueue->next;
@@ -70,7 +92,6 @@ Item_Type Queue<Item_Type>::pop() {
 
 template<typename Item_Type>
 Item_Type Queue<Item_Type>::peek() {
-	//Add exception for empty queue
 	return frontQueue->data;
 }
 

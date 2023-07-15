@@ -3,7 +3,7 @@
 
 bool PostfixConvert::balancedBracketsCheck(string infix) {
 	bool isBalanced = true;
-	
+
 	for (int i = 0; i < infix.length(); i++) {
 		char curChar = infix.at(i);
 		if ((curChar == '{') ||
@@ -12,9 +12,9 @@ bool PostfixConvert::balancedBracketsCheck(string infix) {
 		{
 			expressionChars.push(curChar);
 		}
-		
+
 		//Switch might be better here
-		//Check if empty before these checks
+		//Order of conditionals is important, must check if empty first
 		if (infix.at(i) == '}')
 		{
 			if (!expressionChars.empty() && expressionChars.top() == '{') {
@@ -43,21 +43,22 @@ bool PostfixConvert::balancedBracketsCheck(string infix) {
 			}
 		}
 
+		//Can stop checking whenever a fail state is reached
 		if (!isBalanced) {
 			break;
 		}
 	}
 
-	//Cout statements used for debugging for debugging
+	//Cout statements used for debugging
 	if (isBalanced && expressionChars.empty()) {
-		cout << "The brackets in your expression are balanced!" << endl;
+		//cout << "The brackets in your expression are balanced!" << endl;
 		return true;
 	}
 	else {
 		//cout << "The brackets in your expression are not balanced." << endl;
 		//cout << "isBalanced Check: " << isBalanced << " (0 is not balanced, 1 is)" << endl;
 		//cout << "Empty Stack Check: " << brackets.empty() << "(1 is empty, 0 is not empty.)" << endl;
-		
+
 		return false;
 	}
 }
@@ -72,7 +73,6 @@ string PostfixConvert::infixToPostfix(string infix) {
 		}
 
 		for (int i = 0; i < infix.length(); i++) {
-			
 			char currentChar = infix[i];
 
 			// If the scanned character is an operand, add it to output string.
@@ -82,16 +82,16 @@ string PostfixConvert::infixToPostfix(string infix) {
 				postfixResult += currentChar;
 			}
 
-			// If the scanned character is a bracket, push it to the stack.
-			else if (currentChar == '(' || currentChar == '[' || currentChar == '{') {
+			// If the scanned character is a leading bracket, push it to the stack.
+			else if (isLeadingBracket(currentChar)) {
 				expressionChars.push(currentChar);
 			}
 
-			// If the scanned character is a bracket, pop and add to output string from the stack
-			// until a bracket is encountered.
+			// If the scanned character is a trailing bracket, 
+			// pop and add to output string from the stack
+			// until a leading bracket is encountered.
 			else if (currentChar == ')' || currentChar == ']' || currentChar == '}') {
-				while (!expressionChars.empty() 
-					&& (expressionChars.top() != '(' || expressionChars.top() != '[' || expressionChars.top() != '{')) {
+				while (!isLeadingBracket(expressionChars.top())) {
 					postfixResult += expressionChars.top();
 					expressionChars.pop();
 				}
@@ -99,11 +99,11 @@ string PostfixConvert::infixToPostfix(string infix) {
 			}
 
 			// If an operator is scanned
-			else if ((currentChar == '+') 
+			else if ((currentChar == '+')
 				|| (currentChar == '-')
 				|| (currentChar == '*')
 				|| (currentChar == '/')
-				|| (currentChar == '%')){
+				|| (currentChar == '%')) {
 
 
 				while (!expressionChars.empty()
@@ -130,7 +130,20 @@ int PostfixConvert::priority(char a) {
 	if (a == '+' || a == '-') {
 		return 1;
 	}
-	else {
+	else if ((a == '%') || (a == '*') || (a == '/')) {
 		return 2;
+	}
+	//Leading brackets
+	else {
+		return 0;
+	}
+}
+
+bool PostfixConvert::isLeadingBracket(char a) const {
+	if ((a == '{') || (a == '(') || (a == '[')) {
+		return true;
+	}
+	else {
+		return false;
 	}
 }

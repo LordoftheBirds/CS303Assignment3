@@ -1,13 +1,15 @@
-//#include "Queue.hpp"
+#include "Queue.hpp"
 #include "PostfixConvert.h"
 #include <iostream>
 #include <string>
+#include <exception>
 
 using namespace std;
 
 
 int main() {
-	/*Queue<string> theQueue;
+	//Test of Queue class
+	Queue<string> theQueue;
 	int userChoice;
 	string userString;
 
@@ -35,15 +37,25 @@ int main() {
 			break;
 
 		case 2:
-			cout << "The item you removed from the queue is: ";
-			cout << theQueue.pop();
-			cout << endl;
+			if (!theQueue.isEmpty()) {
+				cout << "The item you removed from the queue is: ";
+				cout << theQueue.pop();
+				cout << endl;
+			}
+			else {
+				cout << "Cannot pop an empty queue." << endl;
+			}
 			break;
 
 		case 3:
-			cout << "The item at the front of the queue is: ";
-			cout << theQueue.peek();
-			cout << endl;
+			if (!theQueue.isEmpty()) {
+				cout << "The item at the front of the queue is: ";
+				cout << theQueue.peek();
+				cout << endl;
+			}
+			else {
+				cout << "Cannot peek an empty queue." << endl;
+			}
 			break;
 
 		case 4:
@@ -56,7 +68,7 @@ int main() {
 			cout << endl;
 			break;
 
-		case 6: 
+		case 6:
 			cout << "Thank you for using! Goodbye." << endl;
 			break;
 
@@ -64,19 +76,24 @@ int main() {
 			cout << "Please enter a valid number." << endl;
 			break;
 		}
-	} while (userChoice != 6);*/
+	} while (userChoice != 6);
 
-	//Start of Postfix Conversion and Balanced Brackets Check
+	//Start of Postfix Conversion Test
 
 	PostfixConvert expressionA;
 	string userExpression;
 
 	cout << endl << "Please enter a mathematical expression in infix notation:" << endl;
+
+	//Remove leading whitespace before getline call
+	cin >> ws;
+
 	getline(cin, userExpression);
 
-	cout << expressionA.infixToPostfix(userExpression);
-	
-	
+	cout << "Your expression in postfix notation is: ";
+	cout << expressionA.infixToPostfix(userExpression) << endl;;
+
+
 	return 0;
 }
 
